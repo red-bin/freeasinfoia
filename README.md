@@ -4,7 +4,7 @@
 
 This repo will mostly be used to track changes as this project progresses. This will eventually be moved to a different repository outside of this account.
 
-Google docs spreadsheet of collected information:
+Google docs spreadsheet of collected information. Shoutout to infinint for helping out with the prettyfication.
 https://docs.google.com/spreadsheets/d/16HiOEZehb_YoUtCgLKG89oMVO0rLX8nwMevHigv5Lq8
 
 Much of this data was collected through parsing http://www.nfoic.org/.
