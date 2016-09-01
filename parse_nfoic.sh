@@ -9,7 +9,7 @@
 for l in `cat links` ; do wget $l ; done
 
 for state in `ls -1 *resources` ; do
-     outfile=`echo $state | awk -F'-' '{print $1,$2}'`
+     outfile=`echo $state | awk -F'-' '{print $1$2}'`
      cat $state | egrep -v "CONSTITUTION OF THE STATE OF|QUICK FOI" |\
          tr '\n' ' ' |\
          sed 's/PUBLICATIONS<\/h3>.*//' |\
