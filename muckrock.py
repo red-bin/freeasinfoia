@@ -3,48 +3,50 @@
 import requests
 import json
 import time
+import selenium
 import sys
 
-from pprint import pprint
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-response = requests.post(
-  'https://www.muckrock.com/api_v1/token-auth/',
-  data={
-    'username': 'dischordic',
-    'password': '1nf1n1nt' 
-  }
-)
+driver = webdriver.Chrome()
 
-token = response.json()['token']
-title = 'Request for list of registerd FOIA/FOIL officers'
-document = 'test123'
+login_url = "https://www.muckrock.com/accounts/login/"
 
-def get_response(url,page_no):
-    headers = { 'Authorization': 'Token %s' % token }
-    data = {'title':title,
-            'document_request':document,
-            'username': '',
-            'password': '',
-            'page_size':100,
-            'page': page_no
-     }
+driver.get(login_url)
 
-    response = requests.post(url, data=data)
-    resp_json = json.loads(response.text)
+time.sleep(10)
 
-    return response
+all_urls = []
 
+pages = {}
 
-stdin = sys.stdin.readlines()
-start = stdin[0]
-end = stdin[1]
+for url in open('muckrock.agencies').readlines():
+    url = url.strip()
+    driver.get(url) 
+    page_source =  driver.page_source
 
-for i in range(,6166):
-    while True:
-        try:
-            url = 'https://www.muckrock.com/api_v1/agency'
-            resp = get_response(url,i)
-            print resp.text
-            break
-        except:
-            time.sleep(5)
+    pages[url] = page_source
+
+    time.sleep(1)
+
+sys.exit(0)
+
+for i in range(1,249):
+    url = 'https://www.muckrock.com/agency/?page=%s' %  i
+    driver.get(url)
+
+    page_urls = driver.execute_script("""
+        agencies = document.getElementsByTagName("table")[0].getElementsByTagName("tr")
+        ret = []
+        for ( i = 1 ; i < agencies.length ; i++ ) {
+            ret.push(agencies[i].getElementsByTagName('td')[0].childNodes[0].href)
+        }
+        return ret
+    """)
+
+    all_urls += page_urls
+    
+
+for i in all_urls:
+    print i 
