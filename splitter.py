@@ -1,3 +1,6 @@
+#incredibly hacky, but works with pickled data from muckrock.py
+#This is needed because the API doesn't directly provide email addresses.
+
 def stats2():
     results = []
     for key,val in pages.items():
