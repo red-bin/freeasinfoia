@@ -1,5 +1,7 @@
 # freeasinfoia
 
+### MESSY. Will clean this up soon..
+
 ### FOIA should be accessible to all and all attempts to make it so should be made.
 
 This repo will mostly be used to track changes as this project progresses. This will eventually be moved to a different repository outside of this account.
